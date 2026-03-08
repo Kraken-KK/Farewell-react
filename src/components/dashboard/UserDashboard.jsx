@@ -17,8 +17,11 @@ import { getPaymentByPhone } from '../../lib/paymentService';
 import { eventDetails } from '../../data/eventData';
 import { useToast } from '../ToastNotification';
 import CustomCursor from '../CustomCursor';
+import PaymentModal from '../PaymentModal';
 import { Query } from 'appwrite';
 import GeminiVoiceAgent from './GeminiVoiceAgent';
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
 import './UserDashboard.css';
 
 // Icons
@@ -382,6 +385,72 @@ const UserDashboard = ({ userName, userSection }) => {
             toast.error('Failed to refresh data.');
         } finally {
             setRefreshing(false);
+        }
+    };
+
+    const handleDownloadTicket = async () => {
+        const ticketElement = document.getElementById('user-premium-ticket');
+        if (!ticketElement) return;
+
+        try {
+            // First scroll to top to ensure complete capture
+            window.scrollTo(0, 0);
+
+            const canvas = await html2canvas(ticketElement, {
+                scale: 2, // Higher scale for better quality
+                useCORS: true,
+                backgroundColor: '#0a0a0a', // Match app background
+                logging: false,
+                onclone: (clonedDoc) => {
+                    // Ensure the cloned element is fully visible for capture
+                    const clone = clonedDoc.getElementById('user-premium-ticket');
+                    if (clone) {
+                        clone.style.transform = 'none';
+                        clone.style.boxShadow = 'none';
+                        clone.style.margin = '0';
+                    }
+                }
+            });
+
+            const imgData = canvas.toDataURL('image/png');
+            // Calculate dimensions to maintain aspect ratio
+            const pdf = new jsPDF({
+                orientation: 'portrait',
+                unit: 'mm',
+                format: 'a4'
+            });
+
+            const pdfWidth = pdf.internal.pageSize.getWidth();
+            const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+
+            // Add a little margin
+            const margin = 10;
+            const finalWidth = pdfWidth - (margin * 2);
+            const finalHeight = (canvas.height * finalWidth) / canvas.width;
+
+            // Add title and styling text above the ticket
+            pdf.setFont("helvetica", "bold");
+            pdf.setFontSize(22);
+            pdf.setTextColor(40, 40, 40);
+            pdf.text("Farewell 2026 - Entry Ticket", pdfWidth / 2, 20, { align: "center" });
+
+            pdf.setFont("helvetica", "normal");
+            pdf.setFontSize(12);
+            pdf.setTextColor(100, 100, 100);
+            pdf.text(`Generated on ${new Date().toLocaleDateString()}`, pdfWidth / 2, 28, { align: "center" });
+
+            // Add the ticket image
+            pdf.addImage(imgData, 'PNG', margin, 40, finalWidth, finalHeight);
+
+            // Save the PDF
+            pdf.save(`Farewell_Ticket_${userName?.replace(/\s+/g, '_') || '2026'}.pdf`);
+
+            // Show a quick success message (using the error state temporarily since there's no success state)
+            toast.success("Ticket downloaded successfully!");
+
+        } catch (err) {
+            console.error("Error generating PDF:", err);
+            toast.error("Could not download ticket. Please try again or take a screenshot.");
         }
     };
 
@@ -909,6 +978,7 @@ const UserDashboard = ({ userName, userSection }) => {
 
                                         {/* Premium Ticket Card */}
                                         <motion.div
+                                            id="user-premium-ticket"
                                             className={`ticket-card-premium ${isCheckedIn ? 'ticket--checked-in' : ''} ${!isFullyVerified ? 'ticket--pending' : ''}`}
                                             initial={{ y: 30, opacity: 0 }}
                                             animate={{ y: 0, opacity: 1 }}
@@ -1019,6 +1089,26 @@ const UserDashboard = ({ userName, userSection }) => {
                                                     {isCheckedIn ? 'CHECKED IN' : isFullyVerified ? 'VERIFIED — READY FOR ENTRY' : 'VERIFICATION PENDING'}
                                                 </span>
                                             </div>
+                                        </motion.div>
+
+                                        <motion.div
+                                            className="ticket-download-action"
+                                            initial={{ opacity: 0, y: 10 }}
+                                            animate={{ opacity: 1, y: 0 }}
+                                            transition={{ delay: 0.4 }}
+                                        >
+                                            <button
+                                                onClick={handleDownloadTicket}
+                                                className="primary-btn download-ticket-btn"
+                                                title="Save a copy to your device"
+                                            >
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                                    <polyline points="7 10 12 15 17 10"></polyline>
+                                                    <line x1="12" y1="15" x2="12" y2="3"></line>
+                                                </svg>
+                                                Download Ticket as PDF
+                                            </button>
                                         </motion.div>
 
                                         {/* Additional Info Cards */}

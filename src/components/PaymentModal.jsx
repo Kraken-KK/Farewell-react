@@ -310,6 +310,10 @@ const PaymentModal = ({ isOpen, onClose, onPaymentVerified, userData }) => {
                                             </div>
                                         </div>
 
+                                        <p style={{ fontSize: '0.85rem', color: 'var(--color-gray-400)', textAlign: 'center', marginTop: '1rem', fontStyle: 'italic', marginBottom: '1.5rem' }}>
+                                            * Note: If you already paid via the Google Form, you can skip payment and directly click below to upload your screenshot.
+                                        </p>
+
                                         <motion.button
                                             className="payment-btn payment-btn--primary"
                                             onClick={() => setStep('upload')}
@@ -333,7 +337,11 @@ const PaymentModal = ({ isOpen, onClose, onPaymentVerified, userData }) => {
                                     >
                                         <h2 className="payment-title">Upload Payment Proof</h2>
                                         <p className="payment-subtitle">
-                                            Upload a screenshot of your GPay payment confirmation
+                                            Upload a screenshot of your GPay payment confirmation.
+                                            <br />
+                                            <span style={{ fontSize: '0.85em', color: 'var(--color-neon-gold)', marginTop: '0.5rem', display: 'inline-block' }}>
+                                                * If you paid via Google Form, kindly provide that screenshot here directly.
+                                            </span>
                                         </p>
 
                                         {/* Upload Zone */}

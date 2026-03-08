@@ -1,0 +1,16 @@
+{
+  "name": "send-otp-email",
+  "version": "1.0.0",
+  "description": "Send OTP email via Pica",
+  "main": "src/main.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/main.js"
+  },
+  "dependencies": {
+    "node-fetch": "^3.3.2"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

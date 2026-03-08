@@ -1,0 +1,223 @@
+.hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 2rem 1rem;
+    overflow: hidden;
+}
+
+.hero__gradient-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom,
+            transparent 0%,
+            transparent 60%,
+            var(--color-deep-space) 100%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.hero__content {
+    position: relative;
+    z-index: 10;
+    max-width: 900px;
+}
+
+.hero__subtitle {
+    color: var(--color-neon-gold);
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+}
+
+.hero__title {
+    font-size: clamp(3rem, 12vw, 9rem);
+    line-height: 1;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+}
+
+.hero__description {
+    color: var(--color-gray-400);
+    font-size: 1.125rem;
+    max-width: 500px;
+    margin: 0 auto 2.5rem;
+    line-height: 1.7;
+}
+
+.hero__cta {
+    padding-top: 1rem;
+}
+
+.hero__button {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 2.5rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--color-white);
+    text-decoration: none;
+    border: 1px solid var(--color-white);
+    background: transparent;
+    overflow: hidden;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.hero__button-bg {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, var(--color-neon-purple) 0%, var(--color-neon-gold) 100%);
+    transform: translateX(-100%);
+    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    z-index: 0;
+}
+
+.hero__button:hover .hero__button-bg {
+    transform: translateX(0);
+}
+
+.hero__button:hover {
+    color: var(--color-deep-space);
+}
+
+.hero__button-text {
+    position: relative;
+    z-index: 1;
+}
+
+/* Scroll Indicator */
+.hero__scroll-indicator {
+    position: absolute;
+    bottom: 3rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--color-gray-500);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+}
+
+.hero__scroll-mouse {
+    width: 24px;
+    height: 38px;
+    border: 2px solid var(--color-gray-600);
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    padding-top: 8px;
+}
+
+.hero__scroll-wheel {
+    width: 4px;
+    height: 8px;
+    background: var(--color-neon-gold);
+    border-radius: 2px;
+}
+
+/* Decorative Elements */
+.hero__decor {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(100px);
+    pointer-events: none;
+}
+
+.hero__decor--1 {
+    width: 500px;
+    height: 500px;
+    background: var(--color-neon-purple);
+    opacity: 0.2;
+    top: -200px;
+    right: -200px;
+}
+
+.hero__decor--2 {
+    width: 400px;
+    height: 400px;
+    background: var(--color-neon-gold);
+    opacity: 0.15;
+    bottom: -100px;
+    left: -150px;
+}
+
+@media (max-width: 768px) {
+    .hero {
+        padding: 1.5rem 1rem;
+        min-height: 100svh;
+        /* Use small viewport height for mobile browsers */
+    }
+
+    .hero__subtitle {
+        font-size: 0.7rem;
+        letter-spacing: 0.18em;
+    }
+
+    .hero__title {
+        font-size: clamp(2.5rem, 14vw, 5rem);
+    }
+
+    .hero__description {
+        font-size: 0.95rem;
+        padding: 0 0.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .hero__button {
+        padding: 0.875rem 2rem;
+        font-size: 0.8rem;
+        width: 100%;
+        max-width: 280px;
+    }
+
+    .hero__scroll-indicator {
+        bottom: 1.5rem;
+    }
+
+    .hero__decor--1 {
+        width: 300px;
+        height: 300px;
+        top: -150px;
+        right: -150px;
+        opacity: 0.12;
+    }
+
+    .hero__decor--2 {
+        width: 250px;
+        height: 250px;
+        bottom: -80px;
+        left: -100px;
+        opacity: 0.1;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero__title {
+        font-size: clamp(2rem, 16vw, 4rem);
+    }
+
+    .hero__description {
+        font-size: 0.85rem;
+    }
+
+    .hero__scroll-indicator {
+        display: none;
+    }
+
+    .hero__decor {
+        display: none;
+    }
+}

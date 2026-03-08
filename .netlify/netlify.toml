@@ -1,0 +1,41 @@
+redirectsOrigin = "config"
+plugins = []
+headers = []
+
+[build]
+edge_functions = "/Users/shivaramarapu/Farewell/farewell-react/netlify/edge-functions"
+publish = "/Users/shivaramarapu/Farewell/farewell-react/dist"
+publishOrigin = "config"
+commandOrigin = "config"
+base = "/Users/shivaramarapu/Farewell/farewell-react"
+command = "npm run build"
+
+[build.environment]
+
+[build.processing]
+
+[build.processing.css]
+
+[build.processing.html]
+
+[build.processing.images]
+
+[build.processing.js]
+
+[build.services]
+
+[functions]
+
+[functions."*"]
+
+[[redirects]]
+from = "/*"
+to = "/index.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]

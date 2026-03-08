@@ -1,0 +1,126 @@
+.countdown {
+    position: relative;
+    padding: 6rem 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-deep-space);
+    overflow: hidden;
+}
+
+.countdown__divider {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg,
+            transparent 0%,
+            var(--color-neon-purple) 50%,
+            transparent 100%);
+    opacity: 0.5;
+}
+
+.countdown__header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.countdown__date {
+    display: block;
+    color: var(--color-neon-gold);
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+}
+
+.countdown__title {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    color: var(--color-white);
+}
+
+.countdown__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    max-width: 900px;
+    width: 100%;
+}
+
+@media (min-width: 768px) {
+    .countdown__grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 3rem;
+    }
+}
+
+.countdown-unit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.countdown-ring {
+    position: relative;
+    width: 120px;
+    height: 120px;
+}
+
+@media (min-width: 768px) {
+    .countdown-ring {
+        width: 160px;
+        height: 160px;
+    }
+}
+
+.countdown-ring__svg {
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+}
+
+.countdown-ring__value {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-serif);
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-white);
+}
+
+@media (min-width: 768px) {
+    .countdown-ring__value {
+        font-size: 2.5rem;
+    }
+}
+
+.countdown-unit__label {
+    color: var(--color-gray-400);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+}
+
+/* Floating Particles */
+.countdown__particles {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.countdown__particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    filter: blur(1px);
+}

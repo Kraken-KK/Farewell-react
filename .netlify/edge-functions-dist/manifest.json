@@ -1,0 +1,1 @@
+{"bundles":[{"asset":"34ca2646ca9f1b65b918fc8d3554fc4744640370eaf2d599442e08ab1ec53659.eszip","format":"eszip2"}],"routes":[{"function":"send-otp-email","pattern":"^/api/send-otp-email/?$","excluded_patterns":[],"path":"/api/send-otp-email"}],"post_cache_routes":[],"bundler_version":"14.9.2","layers":[],"import_map":"netlify:import-map","function_config":{}}

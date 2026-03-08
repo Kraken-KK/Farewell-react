@@ -1,0 +1,9 @@
+{
+    "name": "send-whatsapp-rsvp",
+    "version": "1.0.0",
+    "description": "Send WhatsApp RSVP confirmation via AiSensy",
+    "main": "index.js",
+    "dependencies": {
+        "node-fetch": "^2.7.0"
+    }
+}

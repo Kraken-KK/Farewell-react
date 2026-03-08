@@ -1,0 +1,504 @@
+/* ========================================
+   Gemini Voice Agent — Premium Fluid Orb UI
+   ======================================== */
+
+/* ─── Gemini Fallback Toggle ──────────────────────── */
+.gemini-fallback-toggle {
+    position: fixed;
+    bottom: 6rem;
+    right: 1.5rem;
+    z-index: 9998;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(20, 20, 35, 0.9), rgba(30, 15, 50, 0.9));
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 215, 0, 0.2);
+    color: rgba(255, 255, 255, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    transition: all 0.3s ease;
+}
+
+.gemini-fallback-toggle:hover {
+    border-color: rgba(255, 215, 0, 0.5);
+    color: #FFD700;
+    box-shadow: 0 6px 28px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 215, 0, 0.1);
+}
+
+.gemini-fallback-panel {
+    bottom: 6.5rem !important;
+}
+
+/* ─── Agent Panel ──────────────────────── */
+.voice-agent-panel {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    z-index: 10000;
+    width: 380px;
+    max-height: 85vh;
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(165deg, rgba(12, 12, 22, 0.97), rgba(18, 10, 30, 0.97));
+    backdrop-filter: blur(40px);
+    border: 1px solid rgba(255, 215, 0, 0.15);
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow:
+        0 24px 80px rgba(0, 0, 0, 0.7),
+        0 0 100px rgba(176, 38, 255, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+/* ─── Header ──────────────────────── */
+.agent-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.agent-identity {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.agent-avatar-ring {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #FFD700, #B026FF);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    color: #0a0a0f;
+    box-shadow: 0 4px 16px rgba(255, 215, 0, 0.3);
+}
+
+.agent-identity h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #fff;
+    margin: 0;
+    line-height: 1.2;
+    background: linear-gradient(135deg, #FFD700, #B026FF);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.agent-subtitle {
+    font-size: 0.72rem;
+    color: rgba(255, 255, 255, 0.4);
+    font-weight: 400;
+}
+
+.agent-header-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.agent-mute-btn,
+.agent-close-btn {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: rgba(255, 255, 255, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.agent-mute-btn:hover,
+.agent-close-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+}
+
+.agent-mute-btn.muted {
+    background: rgba(255, 71, 87, 0.2);
+    border-color: rgba(255, 71, 87, 0.4);
+    color: #ff4757;
+}
+
+/* ─── Orb Container ──────────────────────── */
+.agent-orb-container {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.agent-orb-canvas {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    inset: 0;
+}
+
+.orb-status-ring {
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    pointer-events: none;
+    transition: all 0.5s ease;
+}
+
+.orb-status-ring.ring-active {
+    border-color: rgba(0, 206, 209, 0.3);
+    box-shadow: 0 0 30px rgba(0, 206, 209, 0.15);
+    animation: statusPulse 1.5s ease-in-out infinite;
+}
+
+.orb-status-ring.ring-speaking {
+    border-color: rgba(255, 215, 0, 0.3);
+    box-shadow: 0 0 30px rgba(255, 215, 0, 0.15);
+    animation: statusPulse 0.8s ease-in-out infinite;
+}
+
+.orb-status-ring.ring-processing {
+    border-color: rgba(255, 165, 2, 0.3);
+    animation: statusSpin 1.2s linear infinite;
+    border-top-color: transparent;
+}
+
+@keyframes statusPulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    50% {
+        transform: scale(1.1);
+        opacity: 0.5;
+    }
+}
+
+@keyframes statusSpin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.orb-status-label {
+    position: absolute;
+    bottom: 12px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    transition: color 0.3s ease;
+}
+
+.live-transcript {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+    padding: 0.35rem 0.85rem;
+    border-radius: 20px;
+    font-size: 0.78rem;
+    color: rgba(0, 206, 209, 0.9);
+    max-width: 90%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    border: 1px solid rgba(0, 206, 209, 0.15);
+}
+
+/* ─── Chat Messages ──────────────────────── */
+.agent-chat {
+    flex: 1;
+    min-height: 120px;
+    max-height: 220px;
+    overflow-y: auto;
+    padding: 0.75rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
+}
+
+.agent-chat::-webkit-scrollbar {
+    width: 4px;
+}
+
+.agent-chat::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.agent-chat::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+}
+
+.agent-message {
+    display: flex;
+    gap: 0.5rem;
+    max-width: 95%;
+}
+
+.agent-message.user {
+    align-self: flex-end;
+    flex-direction: row-reverse;
+}
+
+.agent-message.ai {
+    align-self: flex-start;
+}
+
+.msg-avatar {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #FFD700, #B026FF);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.6rem;
+    color: #0a0a0f;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.msg-text {
+    padding: 0.55rem 0.85rem;
+    border-radius: 16px;
+    font-size: 0.82rem;
+    line-height: 1.45;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.agent-message.ai .msg-text {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 16px 16px 16px 4px;
+}
+
+.agent-message.user .msg-text {
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.15), rgba(176, 38, 255, 0.15));
+    border: 1px solid rgba(255, 215, 0, 0.12);
+    border-radius: 16px 16px 4px 16px;
+}
+
+/* Thinking dots */
+.thinking-dots {
+    display: flex;
+    gap: 4px;
+    padding: 0.75rem 1rem !important;
+}
+
+.thinking-dots span {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: rgba(255, 215, 0, 0.6);
+    animation: thinkBounce 1.4s ease-in-out infinite;
+}
+
+.thinking-dots span:nth-child(2) {
+    animation-delay: 0.15s;
+}
+
+.thinking-dots span:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+@keyframes thinkBounce {
+
+    0%,
+    80%,
+    100% {
+        transform: scale(0.6);
+        opacity: 0.3;
+    }
+
+    40% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* ─── Controls ──────────────────────── */
+.agent-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    background: rgba(0, 0, 0, 0.15);
+}
+
+.mic-button {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.06);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+}
+
+.mic-button:hover:not(.disabled) {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(0, 206, 209, 0.4);
+    color: #00CED1;
+}
+
+.mic-button.active {
+    background: rgba(0, 206, 209, 0.15);
+    border-color: #00CED1;
+    color: #00CED1;
+    box-shadow: 0 0 20px rgba(0, 206, 209, 0.2);
+}
+
+.mic-button.disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+.mic-pulse {
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    border: 2px solid rgba(0, 206, 209, 0.4);
+    animation: micPulseAnim 1.5s ease-out infinite;
+}
+
+@keyframes micPulseAnim {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1.5);
+        opacity: 0;
+    }
+}
+
+/* Text input */
+.agent-text-input {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 24px;
+    padding: 0.1rem 0.35rem 0.1rem 1rem;
+    transition: all 0.3s ease;
+}
+
+.agent-text-input:focus-within {
+    border-color: rgba(255, 215, 0, 0.3);
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.agent-text-input input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.85rem;
+    font-family: inherit;
+    padding: 0.5rem 0;
+}
+
+.agent-text-input input::placeholder {
+    color: rgba(255, 255, 255, 0.25);
+}
+
+.agent-text-input button {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(176, 38, 255, 0.2));
+    border: none;
+    color: rgba(255, 255, 255, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+}
+
+.agent-text-input button:hover:not(:disabled) {
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.4), rgba(176, 38, 255, 0.4));
+    color: #fff;
+}
+
+.agent-text-input button:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+/* ─── Error ──────────────────────── */
+.agent-error {
+    padding: 0.5rem 1rem;
+    background: rgba(255, 71, 87, 0.1);
+    border-top: 1px solid rgba(255, 71, 87, 0.2);
+    color: #ff4757;
+    font-size: 0.78rem;
+    text-align: center;
+}
+
+/* ─── Responsive ──────────────────────── */
+@media (max-width: 480px) {
+    .voice-agent-panel {
+        left: 0.75rem;
+        right: 0.75rem;
+        bottom: 0.75rem;
+        width: auto;
+        max-height: 80vh;
+    }
+
+    .voice-agent-fab {
+        bottom: 1.25rem;
+        right: 1.25rem;
+        padding: 0.75rem 1.25rem 0.75rem 0.85rem;
+    }
+
+    .fab-label {
+        font-size: 0.8rem;
+    }
+
+    .agent-orb-container {
+        height: 170px;
+    }
+
+    .agent-chat {
+        max-height: 160px;
+    }
+}

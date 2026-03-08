@@ -1,0 +1,210 @@
+.feature-disabled {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 300px;
+    padding: 2rem;
+    position: relative;
+}
+
+.feature-disabled__container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    max-width: 400px;
+    padding: 3rem 2rem;
+    background: linear-gradient(135deg,
+            rgba(176, 38, 255, 0.05) 0%,
+            rgba(255, 215, 0, 0.03) 50%,
+            rgba(176, 38, 255, 0.05) 100%);
+    border-radius: 24px;
+    border: 1px solid rgba(176, 38, 255, 0.2);
+    backdrop-filter: blur(20px);
+    overflow: hidden;
+}
+
+/* Background Orbs */
+.feature-disabled__orbs {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.feature-disabled__orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+}
+
+.feature-disabled__orb--1 {
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, rgba(176, 38, 255, 0.4), transparent 70%);
+    top: -50px;
+    right: -50px;
+}
+
+.feature-disabled__orb--2 {
+    width: 150px;
+    height: 150px;
+    background: radial-gradient(circle, rgba(255, 215, 0, 0.3), transparent 70%);
+    bottom: -30px;
+    left: -30px;
+}
+
+/* Icon */
+.feature-disabled__icon {
+    width: 120px;
+    height: 120px;
+    margin-bottom: 1.5rem;
+    position: relative;
+    z-index: 1;
+}
+
+.feature-disabled__icon svg {
+    width: 100%;
+    height: 100%;
+    filter: drop-shadow(0 0 20px rgba(176, 38, 255, 0.3));
+}
+
+/* Content */
+.feature-disabled__content {
+    position: relative;
+    z-index: 1;
+}
+
+.feature-disabled__title {
+    font-family: 'Cinzel', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 0.75rem;
+    letter-spacing: 0.05em;
+}
+
+.feature-disabled__message {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.feature-disabled__feature-name {
+    color: var(--color-neon-gold, #FFD700);
+    font-weight: 600;
+}
+
+.feature-disabled__developer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.feature-disabled__by {
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.5);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.feature-disabled__name {
+    font-family: 'Cinzel', serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #B026FF, #FFD700);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Decoration */
+.feature-disabled__decoration {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 2rem;
+    position: relative;
+    z-index: 1;
+}
+
+.feature-disabled__line {
+    width: 60px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(176, 38, 255, 0.5), transparent);
+}
+
+.feature-disabled__diamond {
+    color: var(--color-neon-gold, #FFD700);
+    font-size: 0.75rem;
+    opacity: 0.7;
+}
+
+/* Compact Variant */
+.feature-disabled--compact {
+    min-height: auto;
+    padding: 1rem 1.5rem;
+    background: linear-gradient(135deg,
+            rgba(176, 38, 255, 0.1) 0%,
+            rgba(255, 107, 107, 0.05) 100%);
+    border-radius: 12px;
+    border: 1px solid rgba(176, 38, 255, 0.2);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.feature-disabled__icon-small {
+    width: 24px;
+    height: 24px;
+    color: #FF6B6B;
+    flex-shrink: 0;
+}
+
+.feature-disabled__icon-small svg {
+    width: 100%;
+    height: 100%;
+}
+
+.feature-disabled__text-small {
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.feature-disabled__text-small strong {
+    color: var(--color-neon-purple, #B026FF);
+    font-weight: 600;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .feature-disabled {
+        padding: 1rem;
+        min-height: 250px;
+    }
+
+    .feature-disabled__container {
+        padding: 2rem 1.5rem;
+    }
+
+    .feature-disabled__icon {
+        width: 100px;
+        height: 100px;
+    }
+
+    .feature-disabled__title {
+        font-size: 1.25rem;
+    }
+
+    .feature-disabled__message {
+        font-size: 0.875rem;
+    }
+
+    .feature-disabled__name {
+        font-size: 1.1rem;
+    }
+}

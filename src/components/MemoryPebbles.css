@@ -1,0 +1,538 @@
+/* Memory Pebbles Section */
+.memory-pebbles-section {
+    padding: 4rem 1rem 2rem;
+    position: relative;
+    min-height: 700px;
+    /* Increased to accommodate larger physics container */
+    overflow: hidden;
+    background: linear-gradient(180deg,
+            transparent 0%,
+            rgba(15, 15, 35, 0.5) 50%,
+            rgba(25, 20, 40, 0.8) 100%);
+}
+
+.memory-pebbles-section--empty {
+    min-height: 400px;
+}
+
+/* Header */
+.pebbles-header {
+    text-align: center;
+    margin-bottom: 2rem;
+    position: relative;
+    z-index: 10;
+}
+
+.pebbles-header h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--color-white);
+    margin: 0 0 0.5rem 0;
+}
+
+.pebbles-header p {
+    color: var(--color-gray-400);
+    font-size: 1rem;
+    margin: 0;
+}
+
+/* Physics Container */
+.pebbles-physics-container {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    height: 500px;
+    /* Increased from 400px to match physics */
+    border-radius: 1rem;
+    overflow: hidden;
+    background: linear-gradient(180deg,
+            transparent 0%,
+            rgba(0, 0, 0, 0.2) 80%,
+            rgba(50, 40, 60, 0.4) 100%);
+}
+
+/* Physics-based Pebble */
+.physics-pebble {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border-radius: 45% 50% 45% 50%;
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.5),
+        inset 0 3px 8px rgba(255, 255, 255, 0.3),
+        inset 0 -4px 8px rgba(0, 0, 0, 0.3);
+    transition: box-shadow 0.3s ease;
+    user-select: none;
+    will-change: transform, left, top;
+}
+
+.physics-pebble:hover {
+    box-shadow:
+        0 12px 35px rgba(0, 0, 0, 0.6),
+        0 0 20px rgba(255, 215, 0, 0.3),
+        inset 0 3px 8px rgba(255, 255, 255, 0.4),
+        inset 0 -4px 8px rgba(0, 0, 0, 0.3);
+    z-index: 100 !important;
+}
+
+.physics-pebble-name {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: rgba(0, 0, 0, 0.8);
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
+    text-transform: capitalize;
+    max-width: 90%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    pointer-events: none;
+}
+
+/* Tagged Pebble - Special Glow */
+.physics-pebble--tagged {
+    animation: taggedGlow 2s ease-in-out infinite;
+}
+
+.physics-pebble--tagged::before {
+    content: '';
+    position: absolute;
+    inset: -6px;
+    background: linear-gradient(135deg, #FFD700, #B026FF, #FF6B6B, #00CED1);
+    border-radius: inherit;
+    z-index: -1;
+    opacity: 0.6;
+    filter: blur(10px);
+    animation: pulseGlow 2s ease-in-out infinite;
+}
+
+@keyframes taggedGlow {
+
+    0%,
+    100% {
+        box-shadow:
+            0 8px 25px rgba(0, 0, 0, 0.5),
+            0 0 30px rgba(176, 38, 255, 0.5),
+            0 0 60px rgba(255, 215, 0, 0.3),
+            inset 0 3px 8px rgba(255, 255, 255, 0.3);
+    }
+
+    50% {
+        box-shadow:
+            0 8px 25px rgba(0, 0, 0, 0.5),
+            0 0 50px rgba(176, 38, 255, 0.7),
+            0 0 80px rgba(255, 215, 0, 0.5),
+            inset 0 3px 8px rgba(255, 255, 255, 0.3);
+    }
+}
+
+@keyframes pulseGlow {
+
+    0%,
+    100% {
+        opacity: 0.4;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.8;
+        transform: scale(1.1);
+    }
+}
+
+/* Ground */
+.physics-ground {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 8px;
+    background: linear-gradient(90deg,
+            rgba(255, 215, 0, 0.3),
+            rgba(176, 38, 255, 0.3),
+            rgba(255, 215, 0, 0.3));
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
+}
+
+/* Legend */
+.pebbles-legend {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-top: 2rem;
+    position: relative;
+    z-index: 10;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.legend-pebble {
+    width: 24px;
+    height: 14px;
+    border-radius: 45%;
+    box-shadow:
+        0 2px 6px rgba(0, 0, 0, 0.3),
+        inset 0 1px 2px rgba(255, 255, 255, 0.2);
+}
+
+.legend-pebble--tagged {
+    animation: miniGlow 2s ease-in-out infinite;
+}
+
+@keyframes miniGlow {
+
+    0%,
+    100% {
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3), 0 0 10px rgba(176, 38, 255, 0.3);
+    }
+
+    50% {
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3), 0 0 20px rgba(176, 38, 255, 0.5);
+    }
+}
+
+.legend-item span {
+    font-size: 0.8rem;
+    color: var(--color-gray-400);
+}
+
+/* Empty State */
+.empty-pebbles {
+    text-align: center;
+    padding: 3rem;
+}
+
+.empty-pebble-illustration {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+}
+
+.empty-pebbles p {
+    color: var(--color-gray-500);
+    font-size: 1rem;
+}
+
+/* Pebble Detail Modal */
+.pebble-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1001;
+    padding: 1rem;
+}
+
+.pebble-modal {
+    background: linear-gradient(145deg,
+            rgba(20, 20, 45, 0.98) 0%,
+            rgba(30, 30, 60, 0.98) 100%);
+    border: 1px solid rgba(255, 215, 0, 0.2);
+    border-radius: 1.25rem;
+    padding: 1.5rem;
+    max-width: 420px;
+    width: 100%;
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.5),
+        0 0 40px rgba(176, 38, 255, 0.2);
+}
+
+.pebble-modal-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+    position: relative;
+}
+
+.pebble-avatar {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: var(--color-deep-space);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.pebble-author-info h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    color: var(--color-white);
+    font-weight: 600;
+}
+
+.pebble-author-info span {
+    font-size: 0.8rem;
+    color: var(--color-gray-400);
+}
+
+.pebble-close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    border-radius: 50%;
+    width: 2rem;
+    height: 2rem;
+    font-size: 1.25rem;
+    color: var(--color-gray-400);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+
+.pebble-close:hover {
+    background: rgba(255, 255, 255, 0.2);
+    color: var(--color-white);
+}
+
+.pebble-message {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 0.75rem;
+    padding: 1.25rem;
+    margin-bottom: 1rem;
+}
+
+.pebble-message p {
+    margin: 0;
+    color: var(--color-white);
+    font-size: 1rem;
+    line-height: 1.6;
+    font-style: italic;
+}
+
+.pebble-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.tags-label {
+    font-size: 0.75rem;
+    color: var(--color-gray-500);
+    margin-right: 0.25rem;
+}
+
+.tag-chip {
+    padding: 0.25rem 0.6rem;
+    background: rgba(176, 38, 255, 0.2);
+    border: 1px solid rgba(176, 38, 255, 0.4);
+    border-radius: 1rem;
+    font-size: 0.75rem;
+    color: var(--color-neon-purple);
+}
+
+.pebble-date {
+    text-align: right;
+    font-size: 0.7rem;
+    color: var(--color-gray-500);
+    margin-bottom: 1rem;
+}
+
+/* Owner Actions */
+.pebble-owner-actions {
+    display: flex;
+    gap: 0.75rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.pebble-edit-btn,
+.pebble-delete-btn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid;
+}
+
+.pebble-edit-btn {
+    background: rgba(255, 215, 0, 0.1);
+    border-color: rgba(255, 215, 0, 0.3);
+    color: var(--color-neon-gold);
+}
+
+.pebble-edit-btn:hover {
+    background: rgba(255, 215, 0, 0.2);
+    border-color: var(--color-neon-gold);
+}
+
+.pebble-delete-btn {
+    background: rgba(239, 68, 68, 0.1);
+    border-color: rgba(239, 68, 68, 0.3);
+    color: #f87171;
+}
+
+.pebble-delete-btn:hover:not(:disabled) {
+    background: rgba(239, 68, 68, 0.2);
+    border-color: #ef4444;
+}
+
+.pebble-delete-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.pebble-edit-btn svg,
+.pebble-delete-btn svg {
+    width: 1rem;
+    height: 1rem;
+}
+
+/* Edit Modal */
+.edit-modal h3 {
+    color: var(--color-white);
+    margin: 0 0 1rem 0;
+    font-size: 1.25rem;
+}
+
+.edit-modal textarea {
+    width: 100%;
+    min-height: 120px;
+    padding: 1rem;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 0.75rem;
+    color: var(--color-white);
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    resize: vertical;
+    margin-bottom: 1rem;
+}
+
+.edit-modal textarea:focus {
+    outline: none;
+    border-color: var(--color-neon-purple);
+}
+
+.edit-actions {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: flex-end;
+}
+
+.cancel-btn,
+.save-btn {
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.cancel-btn {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: var(--color-gray-400);
+}
+
+.cancel-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--color-white);
+}
+
+.save-btn {
+    background: linear-gradient(135deg, var(--color-neon-gold), #FFA500);
+    border: none;
+    color: var(--color-deep-space);
+}
+
+.save-btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+}
+
+.save-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .memory-pebbles-section {
+        padding: 3rem 0.75rem 1.5rem;
+        min-height: 550px;
+    }
+
+    .pebbles-header h2 {
+        font-size: 1.75rem;
+    }
+
+    .pebbles-header p {
+        font-size: 0.9rem;
+    }
+
+    .pebbles-physics-container {
+        height: 400px;
+    }
+
+    .physics-pebble-name {
+        font-size: 0.6rem;
+    }
+
+    .pebbles-legend {
+        gap: 0.75rem;
+    }
+
+    .legend-item span {
+        font-size: 0.7rem;
+    }
+
+    .pebble-modal {
+        max-width: 100%;
+        margin: 0 0.5rem;
+        padding: 1.25rem;
+    }
+
+    .pebble-owner-actions {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 480px) {
+    .memory-pebbles-section {
+        padding: 2rem 0.5rem 1rem;
+        min-height: 450px;
+    }
+
+    .pebbles-header h2 {
+        font-size: 1.5rem;
+    }
+
+    .pebbles-physics-container {
+        height: 350px;
+    }
+
+    .pebble-modal {
+        border-radius: 1rem;
+    }
+
+    .pebble-message p {
+        font-size: 0.9rem;
+    }
+}

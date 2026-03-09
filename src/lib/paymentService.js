@@ -208,6 +208,15 @@ export const validatePayment = (extractedData, expectedAmount = null) => {
         };
     }
 
+    if (paidAmount > expectedNum) {
+        // Handle overpayment (e.g. they paid 1800 instead of 1600)
+        return {
+            valid: true,
+            reason: `Payment verified. You overpaid by ₹${paidAmount - expectedNum}. Admin will refund this amount.`,
+            status: 'refund_needed'
+        };
+    }
+
     // Check confidence
     if (extractedData.confidence === 'low') {
         return {
@@ -422,7 +431,7 @@ export const processPayment = async (file, userData) => {
     const screenshotFileId = await uploadScreenshot(file);
 
     // Step 5: Save to database
-    const status = validation.needsReview ? 'pending' : 'verified';
+    const status = validation.status || (validation.needsReview ? 'pending' : 'verified');
     const paymentDoc = await savePayment({
         fullName: userData.fullName,
         phone: userData.phone,

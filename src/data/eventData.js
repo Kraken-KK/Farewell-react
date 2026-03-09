@@ -59,7 +59,7 @@ export const eventDetails = {
     endTime: "Late",
     dressCode: "Formal",
     venue: "Luft",
-    price: 1800,
+    price: 1600,
     organizer: "Gitanjali Devashray Student Council '26",
     description: "Prepare to leave with a blast. A celebration of legacy, friendship, and the future.",
     venueDescription: "Experience the pinnacle of nightlife and celebration. A rooftop ambience, premium sound, and an exclusive menu crafted for the Class of 2026."

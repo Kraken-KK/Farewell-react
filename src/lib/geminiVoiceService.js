@@ -24,7 +24,7 @@ EVENT DETAILS:
 - Time: 5:00 PM onwards (goes Late into the night)
 - Venue: Luft (a premium rooftop venue)
 - Dress Code: Formal (think suits, dresses, looking absolutely fire)
-- Ticket Price: ₹1800 per person
+- Ticket Price: ₹1600 per person
 - Organizer: Gitanjali Devashray Student Council '26
 
 WHAT'S INCLUDED:
@@ -43,7 +43,7 @@ THE ADMIN / ORGANIZER:
 APP FEATURES (this app you're part of):
 - RSVP Registration with student verification
 - Digital Entry Ticket with QR code
-- Payment tracking (₹1800 via UPI/bank transfer)
+- Payment tracking (₹1600 via UPI/bank transfer)
 - Verification pipeline: Identity → Payment → Admission
 - Song Voting system — students can search YouTube and vote for songs to be played at the party
 - Announcements feed — organizers broadcast updates

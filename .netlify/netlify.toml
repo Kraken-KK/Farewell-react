@@ -7,7 +7,6 @@ edge_functions = "/Users/shivaramarapu/Farewell/farewell-react/netlify/edge-func
 publish = "/Users/shivaramarapu/Farewell/farewell-react/dist"
 publishOrigin = "config"
 commandOrigin = "config"
-base = "/Users/shivaramarapu/Farewell/farewell-react"
 command = "npm run build"
 
 [build.environment]

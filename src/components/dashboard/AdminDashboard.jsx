@@ -858,10 +858,11 @@ const AdminDashboard = ({ adminName }) => {
                                                         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px' }}>
                                                             <span className={`payment-status-badge status--${payment.status}`} title={payment.aiNotes}>
                                                                 {payment.status === 'verified' ? '✓ Verified' :
-                                                                    payment.status === 'pending' ? '⏳ Pending' :
-                                                                        payment.status === 'rejected' ? '✗ Rejected' :
-                                                                            payment.status === 'amount_mismatch' ? '⚠ Mismatch' :
-                                                                                payment.status}
+                                                                    payment.status === 'refund_needed' ? '🔄 Needs Refund (₹200)' :
+                                                                        payment.status === 'pending' ? '⏳ Pending' :
+                                                                            payment.status === 'rejected' ? '✗ Rejected' :
+                                                                                payment.status === 'amount_mismatch' ? '⚠ Mismatch' :
+                                                                                    payment.status}
                                                             </span>
                                                             {payment.aiConfidence && (
                                                                 <span style={{ fontSize: '0.65rem', opacity: 0.7, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
@@ -887,6 +888,16 @@ const AdminDashboard = ({ adminName }) => {
                                                     </td>
                                                     <td>
                                                         <div style={{ display: 'flex', gap: '0.3rem' }}>
+                                                            {payment.status === 'refund_needed' && (
+                                                                <a
+                                                                    href={`upi://pay?pa=${payment.phone}@ybl&pn=${payment.fullName}&am=200&cu=INR&tn=Farewell Ticket Refund`}
+                                                                    className="refund-btn-small"
+                                                                    title="Refund ₹200 via UPI"
+                                                                    style={{ padding: '0.3rem 0.5rem', fontSize: '0.75rem', borderRadius: '6px', border: 'none', background: 'rgba(255, 165, 0, 0.15)', color: '#ffa502', cursor: 'pointer', textDecoration: 'none', display: 'flex', alignItems: 'center' }}
+                                                                >
+                                                                    💸 200
+                                                                </a>
+                                                            )}
                                                             {payment.status !== 'verified' && (
                                                                 <motion.button
                                                                     className="approve-btn-small"

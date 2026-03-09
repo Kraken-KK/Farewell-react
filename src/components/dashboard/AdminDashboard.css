@@ -1176,13 +1176,19 @@
 }
 
 .payment-status-badge.status--rejected {
-    background: rgba(248, 113, 113, 0.2);
+    background: rgba(248, 113, 113, 0.15);
     color: #f87171;
 }
 
 .payment-status-badge.status--amount_mismatch {
-    background: rgba(251, 146, 60, 0.2);
+    background: rgba(251, 146, 60, 0.15);
     color: #fb923c;
+}
+
+.payment-status-badge.status--refund_needed {
+    background: rgba(255, 165, 0, 0.15);
+    color: #ffa502;
+    border: 1px dashed rgba(255, 165, 0, 0.4);
 }
 
 /* Rejected Row Highlight */

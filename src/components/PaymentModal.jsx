@@ -77,7 +77,7 @@ const PaymentModal = ({ isOpen, onClose, onPaymentVerified, userData }) => {
     const fileInputRef = useRef(null);
 
     const handleGPayClick = () => {
-        window.location.href = "upi://pay?pa=rr.dhruti@oksbi&pn=Farewell-2026&am=1800&cu=INR&tn=Please share a screenshot in the web - Thankyou team Farewell";
+        window.location.href = `upi://pay?pa=rr.dhruti@oksbi&pn=Farewell-2026&am=${eventDetails.price}&cu=INR&tn=Please share a screenshot in the web - Thankyou team Farewell`;
     };
 
     const resetModal = useCallback(() => {
@@ -341,6 +341,10 @@ const PaymentModal = ({ isOpen, onClose, onPaymentVerified, userData }) => {
                                             <br />
                                             <span style={{ fontSize: '0.85em', color: 'var(--color-neon-gold)', marginTop: '0.5rem', display: 'inline-block' }}>
                                                 * If you paid via Google Form, kindly provide that screenshot here directly.
+                                            </span>
+                                            <br />
+                                            <span style={{ fontSize: '0.85em', color: '#4ade80', marginTop: '0.3rem', display: 'inline-block' }}>
+                                                * Note: If you already paid ₹1800, please upload your screenshot. The ₹200 excess will be refunded!
                                             </span>
                                         </p>
 

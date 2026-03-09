@@ -1426,6 +1426,10 @@
     color: #fb923c;
 }
 
+.inline-status--refund_needed {
+    color: #ffa502;
+}
+
 /* ===== No Ticket Premium ===== */
 .no-ticket-premium {
     text-align: center;

@@ -1139,8 +1139,9 @@ const UserDashboard = ({ userName, userSection }) => {
                                                         <h4>Payment</h4>
                                                         <p>₹{userPayment.paidAmount} — <span className={`inline-status inline-status--${userPayment.status}`}>
                                                             {userPayment.status === 'verified' ? 'Confirmed' :
-                                                                userPayment.status === 'pending' ? 'Under Review' :
-                                                                    userPayment.status === 'rejected' ? 'Rejected' : userPayment.status}
+                                                                userPayment.status === 'refund_needed' ? 'Confirmed (₹200 Refund Pending)' :
+                                                                    userPayment.status === 'pending' ? 'Under Review' :
+                                                                        userPayment.status === 'rejected' ? 'Rejected' : userPayment.status}
                                                         </span></p>
                                                         {userPayment.transactionId && <p className="info-card-meta">Txn: {userPayment.transactionId}</p>}
                                                     </div>

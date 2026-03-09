@@ -308,18 +308,25 @@
 }
 
 /* Responsive */
-@media (max-width: 400px) {
+@media (max-width: 480px) {
     .otp-input {
-        width: 2.5rem;
-        height: 3rem;
+        width: 12vw;
+        height: 14vw;
+        max-width: 2.5rem;
+        max-height: 3rem;
         font-size: 1.25rem;
     }
 
     .otp-inputs {
-        gap: 0.35rem;
+        gap: 1.5vw;
     }
 
     .otp-separator {
-        margin: 0 0.15rem;
+        margin: 0;
+        font-size: 1rem;
+    }
+
+    .otp-wrapper {
+        padding: 1rem;
     }
 }

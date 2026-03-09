@@ -68,9 +68,9 @@ const OTPInput = ({
         }
 
         // Check if OTP is complete
-        const completeOtp = newOtp.join('');
-        if (completeOtp.length === length && !completeOtp.includes('')) {
-            onComplete?.(completeOtp);
+        const isComplete = newOtp.every(digit => digit !== '');
+        if (isComplete) {
+            onComplete?.(newOtp.join(''));
         }
     };
 

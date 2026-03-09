@@ -23,7 +23,7 @@ EVENT DETAILS:
 - Date: March 1st, 2026
 - Time: 5:00 PM onwards (goes Late into the night)
 - Venue: Luft (a premium rooftop venue)
-- Dress Code: Formal (think suits, dresses, looking absolutely fire)
+- Dress Code: Semi-Formals (think looking sharp but ready to party, no strict suits required but look good!)
 - Ticket Price: ₹1600 per person
 - Organizer: Gitanjali Devashray Student Council '26
 

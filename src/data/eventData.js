@@ -57,7 +57,7 @@ export const eventDetails = {
     date: "March 1st, 2026",
     startTime: "12:00 PM",
     endTime: "Late",
-    dressCode: "Formal",
+    dressCode: "Semi-Formals",
     venue: "Luft",
     price: 1600,
     organizer: "Gitanjali Devashray Student Council '26",
